@@ -6,16 +6,16 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "./uploads/categories")
     },
-    filename: function(req,file,cb){
+    filename: function (req, file, cb) {
         cb(null, Date.now() + "-" + file.originalname);
     }
 });
 
-const fileFilter = (req, file, callback)=>{
-    const acceptableExt = [".png",".jpg",".jpeg"];
+const fileFilter = (req, file, callback) => {
+    const acceptableExt = [".png", ".jpg", ".jpeg"];
     if (!acceptableExt.includes(Path.extname(file.originalname))) {
-        return callback(new Error("Only .png, .jpg and .jpeg format allowed"));
-        
+        return callback(new Error("Only .png, .jpg and .jpeg format allowed!"));
+
     }
 
     const fileSize = parseInt(req.headers["content-length"]);
@@ -28,8 +28,8 @@ const fileFilter = (req, file, callback)=>{
 };
 
 let upload = multer({
-    storage:storage._handleFile,
-    fileFilter:fileFilter,
+    storage: storage,
+    fileFilter: fileFilter,
     fileSize: 1048576,
 });
 
